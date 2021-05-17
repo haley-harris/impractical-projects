@@ -1,29 +1,63 @@
 #! python3
 
 from collections import defaultdict
+from googletrans import Translator
 import pprint
 
 '''
 program creates a chart showing the number of letters that occur in a
 sentence provided by the user - showcasing the most commonly used
 letters in english (ETAOIN)
+
+pypi translate module used to translate 
+
 '''
 
 # user input string
-sentence = input('Type a sentence: ')
+text = input('Type a sentence: ')
 
-ALPHABET = 'abcdefghijklmnopqrstuvwxyz'
 
-# create dictionary
-mapped = defaultdict(list)
+def translate_to_spanish(text):
+    '''
+    translates text to spanish
+    '''
+    
+    # initialize translator instance
+    translator = Translator()
+    # translate user input text to spanish
+    translation = translator.translate(text, dest='es')
 
-for c in sentence:
-    # change all chars to lowercase
-    c = c.lower()
+    print('\n' + translation.text + '\n')
+    return translation.text
 
-    if c in ALPHABET:
-        mapped[c].append(c)
 
-# pretty print to have each key/value pair printed on a separate line
-pprint.pprint(mapped)
+def create_bar_graph(text):
+    '''
+    creates bar graph dictionary
+    '''
 
+    ALPHABET = 'abcdefghijklmnopqrstuvwxyz'
+
+    # create dictionary
+    mapped = defaultdict(list)
+
+    for c in text:
+        # change all chars to lowercase
+        c = c.lower()
+
+        if c in ALPHABET:
+            mapped[c].append(c)
+
+    # pretty print to have each key/value pair printed on a separate line
+    pprint.pprint(mapped)
+
+
+if __name__ == '__main__':
+
+    create_bar_graph(text)
+
+    # ask if user wants to translate and graph in spanish
+    choice = input('Would you like to translate to Spanish? y/n: ').lower()
+
+    if choice == 'y':
+        create_bar_graph(translate_to_spanish(text))
