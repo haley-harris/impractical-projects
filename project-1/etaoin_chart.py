@@ -9,8 +9,6 @@ program creates a chart showing the number of letters that occur in a
 sentence provided by the user - showcasing the most commonly used
 letters in english (ETAOIN)
 
-pypi translate module used to translate 
-
 '''
 
 # user input string
@@ -21,7 +19,7 @@ def translate_to_spanish(text):
     '''
     translates text to spanish
     '''
-    
+
     # initialize translator instance
     translator = Translator()
     # translate user input text to spanish
